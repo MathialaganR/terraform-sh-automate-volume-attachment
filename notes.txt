@@ -1,0 +1,4 @@
+I also needed to persist ebs volumes between instance re-creates and experienced this problem when trying to use volume_attachments. My workaround solution is to drop the "aws_volume_attachment"s and have each instance use the aws cli at bootup time to self-attach the volume it is paired with. When the instance is re-created terraform first destroys the instance which detaches the volume and makes it available for the next instance coming up.
+
+In the instance user-data include the following template script
+elasticsearch_mount_vol.sh
